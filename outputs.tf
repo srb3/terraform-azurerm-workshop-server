@@ -9,7 +9,7 @@ output "resource_group_names" {
 
 output "server_public_ip" {
   value = data.azurerm_public_ip.datasourceip.*.ip_address
-  depends_on = ["module.server"]
+  depends_on = [module.server]
 }
 
 output "server_private_ip" {
@@ -20,7 +20,7 @@ output "server_private_ip" {
 output "public_ip_fqdn" {
   description = "The dns name of the public IP"
   value       = data.azurerm_public_ip.datasourceip.*.fqdn
-  depends_on = ["module.server"]
+  depends_on = [module.server]
 }
 
 output "public_ip_dns_name" {
