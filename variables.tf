@@ -253,12 +253,12 @@ variable "vm_os_version" {
 
 variable "public_ip_address_allocation" {
   description = "This attribute is deprecated, and to be replaced by 'allocation_method'"
-  default     = ""
+  default     = "Dynamic"
 }
 
 variable "allocation_method" {
   description = "Defines how an IP address is assigned. Options are Static or Dynamic."
-  default     = ""
+  default     = "Dynamic"
 }
 
 variable "nb_public_ip" {

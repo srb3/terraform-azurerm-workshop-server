@@ -48,7 +48,7 @@ module "network-security-group" {
 
 module "server" {
   source                        = "srb3/compute/azurerm"
-  version                       = "2.0.2"
+  version                       = "2.0.4"
   resource_group_name           = azurerm_resource_group.rg.name
   location                      = azurerm_resource_group.rg.location 
   security_group_id             = module.network-security-group.network_security_group_id
@@ -70,7 +70,7 @@ module "server" {
   vm_os_offer                   = var.vm_os_offer
   vm_os_sku                     = var.vm_os_sku
   vm_os_version                 = var.vm_os_version
-  public_ip_address_allocation  = var.allocation_method
+  allocation_method             = var.allocation_method
   nb_public_ip                  = var.nb_public_ip
   delete_os_disk_on_termination = var.delete_os_disk_on_termination
   data_sa_type                  = var.data_sa_type
