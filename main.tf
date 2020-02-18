@@ -3,8 +3,9 @@ resource "random_id" "hash" {
 }
 
 locals {
-  prefix    = "${lookup(var.tags, "prefix", "changeme")}-${random_id.hash.hex}"
-  hostname  = var.ip_hostname ? var.instance_name : "${local.prefix}-${var.instance_name}"
+  prefix           = "${lookup(var.tags, "prefix", "changeme")}-${random_id.hash.hex}"
+  hostname         = var.ip_hostname ? var.instance_name : "${local.prefix}-${var.instance_name}"
+  is_windows_image = var.system_type == "windows" ? true : false
   bootstrap = var.templatefile != "" ? var.templatefile : templatefile("${path.module}/templates/bootstrap.sh", {
     create_user               = var.create_user,
     user_name                 = var.user_name,
@@ -65,7 +66,7 @@ module "server" {
   vm_hostname                   = var.instance_name
   vm_os_simple                  = var.vm_os_simple
   vm_os_id                      = var.vm_os_id
-  is_windows_image              = var.is_windows_image
+  is_windows_image              = local.is_windows_image
   vm_os_publisher               = var.vm_os_publisher
   vm_os_offer                   = var.vm_os_offer
   vm_os_sku                     = var.vm_os_sku
