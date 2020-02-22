@@ -1,4 +1,4 @@
-%{ if system_type == "linux" }#!/bin/bash -x %{ endif } %{if system_type == "windows" } <powershell>  %{ endif }
+%{ if system_type == "linux" }#!/bin/bash -x %{ endif } 
 %{ if system_type == "linux" }
 exec > /tmp/terraform_bootstrap_script.log 2>&1
 
@@ -250,5 +250,4 @@ Set-Content -Path $dtp\\${k.name} -Value $helper_file
 %{ endfor}
 
 Set-MpPreference -DisableRealtimeMonitoring $false
-</powershell>
 %{ endif }
