@@ -54,7 +54,6 @@ module "server" {
   location                      = azurerm_resource_group.rg.location 
   security_group_id             = module.network-security-group.network_security_group_id
   vnet_subnet_id                = var.vnet_subnet_id
-  public_ip_dns                 = var.public_ip_dns
   admin_password                = var.user_pass
   ssh_key                       = var.user_public_key
   remote_port                   = var.remote_port

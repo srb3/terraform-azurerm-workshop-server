@@ -186,11 +186,6 @@ variable "vnet_subnet_id" {
   description = "The subnet id of the virtual network where the virtual machines will reside."
 }
 
-variable "public_ip_dns" {
-  description = "Optional globally unique per datacenter region domain name label to apply to each public ip address. e.g. thisvar.varlocation.cloudapp.azure.com where you specify only thisvar here. This is an array of names which will pair up sequentially to the number of public ips defined in var.nb_public_ip. One name or empty string is required for every public ip. If no public ip is desired, then set this to an array with a single empty string."
-  default     = [""]
-}
-
 variable "remote_port" {
   description = "Remote tcp port to be used for access to the vms created via the nsg applied to the nics."
   default     = ""
