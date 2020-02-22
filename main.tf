@@ -49,7 +49,7 @@ module "network-security-group" {
 
 module "server" {
   source                        = "srb3/compute/azurerm"
-  version                       = "2.0.7"
+  version                       = "2.0.8"
   resource_group_name           = azurerm_resource_group.rg.name
   location                      = azurerm_resource_group.rg.location 
   security_group_id             = module.network-security-group.network_security_group_id
