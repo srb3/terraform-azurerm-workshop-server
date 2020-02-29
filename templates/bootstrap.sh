@@ -204,7 +204,7 @@ choco install googlechrome -y
 update_path 'C:\Program Files (x86)\Google\Chrome\Application\'
 choco install vscode -y
 update_path 'C:\Program Files\Microsoft VS Code\'
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V –All
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 choco install docker-desktop -y
 choco install vagrant -y
 %{ endif }
