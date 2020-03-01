@@ -199,6 +199,7 @@ function update_path {
 
 %{ if nested_virt }
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+choco install vagrant -y
 %{ endif }
 
 %{ if install_workstation_tools }
@@ -211,7 +212,6 @@ update_path 'C:\Program Files\Microsoft VS Code\'
 choco install docker-desktop -y
 Add-LocalGroupMember -Group 'Administrators' -Member ('docker-users') -Verbose
 Add-LocalGroupMember -Group 'docker-users' -Member ('${user_name}','Administrators') -Verbose
-choco install vagrant -y
 %{ endif }
 
 %{ if workstation_hab }
