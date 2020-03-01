@@ -198,6 +198,7 @@ function update_path {
 }
 
 %{ if nested_virt }
+install_choco
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 choco install vagrant -y
 %{ endif }
