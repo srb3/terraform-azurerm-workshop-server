@@ -221,8 +221,8 @@ choco install habitat --version ${hab_version} -y
   %{ endif }
 hab license accept
 %{ if hab_pkg_export != ""}
-hab pkg install ${install_hab_pkg} 
-hab pkg export docker ${install_hab_pkg}
+hab pkg install ${hab_pkg_export} 
+hab pkg export docker ${hab_pkg_export}
 %{ endif }
 
 %{ endif }
