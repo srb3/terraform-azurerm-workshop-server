@@ -197,6 +197,10 @@ function update_path {
   Write-Output "$oldpath '$newpath'" | Out-File -FilePath 'C:\Users\${user_name}\Documents\WindowsPowerShell\profile.ps1'
 }
 
+%{ if nested_virt }
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+%{ endif }
+
 %{ if install_workstation_tools }
 install_choco
 choco install git -y
@@ -204,7 +208,6 @@ choco install googlechrome -y
 update_path 'C:\Program Files (x86)\Google\Chrome\Application\'
 choco install vscode -y
 update_path 'C:\Program Files\Microsoft VS Code\'
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 choco install docker-desktop -y
 choco install vagrant -y
 %{ endif }
@@ -217,6 +220,11 @@ choco install habitat -y
 choco install habitat --version ${hab_version} -y
   %{ endif }
 hab license accept
+%{ if hab_pkg_export != ""}
+hab pkg install ${install_hab_pkg} 
+hab pkg export docker ${install_hab_pkg}
+%{ endif }
+
 %{ endif }
 
 %{ if workstation_chef }

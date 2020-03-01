@@ -26,7 +26,9 @@ locals {
     helper_files              = var.helper_files,
     ip_hostname               = var.ip_hostname,
     set_hostname              = var.set_hostname,
-    populate_hosts            = var.populate_hosts
+    populate_hosts            = var.populate_hosts,
+    nested_virt               = var.nested_virt,
+    hab_pkg_export            = var.hab_pkg_export
   })
 }
 

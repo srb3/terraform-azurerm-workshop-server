@@ -33,6 +33,18 @@ variable "populate_hosts" {
   default     = false
 }
 
+variable "nested_virt" {
+  description = "Enable all hyper v features on a windows host, does nothing on linux"
+  type        = bool
+  default     = false
+}
+
+variable "hab_pkg_export" {
+  description = "assigin a habitat package origin/name to this variable, and it will be installed on the system and exported as a docker container. windows only"
+  type        = string
+  default     = ""
+}
+
 variable "tmp_path" {
   description = "The location of the temp path to use for downloading installers and executing scripts"
   type        = string
