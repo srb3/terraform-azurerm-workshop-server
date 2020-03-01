@@ -209,6 +209,8 @@ update_path 'C:\Program Files (x86)\Google\Chrome\Application\'
 choco install vscode -y
 update_path 'C:\Program Files\Microsoft VS Code\'
 choco install docker-desktop -y
+Add-LocalGroupMember -Group 'Administrators' -Member ('docker-users') -Verbose
+Add-LocalGroupMember -Group 'docker-users' -Member ('${user_name}','Administrators') -Verbose
 choco install vagrant -y
 %{ endif }
 
