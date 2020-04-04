@@ -33,7 +33,7 @@ variable "populate_hosts" {
   default     = false
 }
 
-variable "nested_virt" {
+variable "hyperv" {
   description = "Enable all hyper v features on a windows host, does nothing on linux"
   type        = bool
   default     = false
@@ -43,6 +43,12 @@ variable "hab_pkg_export" {
   description = "assigin a habitat package origin/name to this variable, and it will be installed on the system and exported as a docker container. windows only"
   type        = string
   default     = ""
+}
+
+variable "hab_pkgs" {
+  description = "A list of habitat packages to install"
+  type        = list
+  default     = []
 }
 
 variable "tmp_path" {
@@ -67,6 +73,36 @@ variable "choco_install_url" {
   description = "The url to use for installing choco"
   type        = string
   default     = "https://chocolatey.org/install.ps1"
+}
+
+variable "terraform" {
+  description = "Should we install terraform on this system"
+  type        = bool
+  default     = false
+}
+
+variable "docker" {
+  description = "Should we install docker on this system"
+  type        = bool
+  default     = false
+}
+
+variable "docker_engine" {
+  description = "Should we install docker engine on this system"
+  type        = bool
+  default     = false
+}
+
+variable "vbox" {
+  description = "Should we install virtual box on this system"
+  type        = bool
+  default     = false
+}
+
+variable "vagrant" {
+  description = "Should we install vagrant on this system"
+  type        = bool
+  default     = false
 }
 
 variable "install_workstation_tools" {
@@ -111,6 +147,17 @@ variable "helper_files" {
   default     = "[]"
 }
 
+variable "wsl" {
+  description = "Should we enable windows subsystem for linux, requires reboot"
+  type        = bool
+  default     = false
+}
+
+variable "kb_uk" {
+  description = "Shoul we switch to a uk keyboard"
+  type        = bool
+  default     = false
+}
 ########### connection settings ##################
 
 variable "user_name" {
@@ -284,10 +331,15 @@ variable "data_disk_size_gb" {
   default     = ""
 }
 
+variable "os_disk_size_gb" {
+  description = "Storage data disk size size"
+  default     = "30"
+}
+
 variable "data_disk" {
-  type        = bool
+  type        = string
   description = "Set to true to add a datadisk."
-  default     = false
+  default     = "false"
 }
 
 variable "boot_diagnostics" {
@@ -317,4 +369,34 @@ variable "domain_name_labels" {
   description = "(Optional) an optional list of DNS names for the public ip"
   type        = list
   default     = []
+}
+
+variable "azure_agent" {
+  description = "(Optional) Should this server be setup as an azure devopts agent"
+  type        = bool
+  default     = false
+}
+
+variable "azure_agent_version" {
+  description = "(Optional) what version of the azure agent should we install"
+  type        = string
+  default     = "2.165.0"
+}
+
+variable "azure_agent_org" {
+  description = "(Optional not needed if not setting up an azure agent) which org to associate the agent with"
+  type        = string
+  default     = ""
+}
+
+variable "azure_agent_pat" {
+  description = "(Optional not needed if not setting up an azure agent) a PAT token to authenticate the agent with"
+  type        = string
+  default     = ""
+}
+
+variable "azure_agent_pool" {
+  description = "(Optional if not setting up an azure agent) The pool to associate the agent with"
+  type        = string
+  default     = "default"
 }

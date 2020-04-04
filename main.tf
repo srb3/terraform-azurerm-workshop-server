@@ -21,27 +21,34 @@ locals {
     workstation_hab           = var.workstation_hab,
     hab_version               = var.hab_version,
     install_workstation_tools = var.install_workstation_tools,
+    terraform                 = var.terraform,
+    docker                    = var.docker,
+    docker_engine             = var.docker_engine,
+    vbox                      = var.vbox,
+    vagrant                   = var.vagrant,
     choco_install_url         = var.choco_install_url,
-    hostname                  = local.hostname
+    hostname                  = local.hostname,
     helper_files              = var.helper_files,
     ip_hostname               = var.ip_hostname,
     set_hostname              = var.set_hostname,
     populate_hosts            = var.populate_hosts,
-    nested_virt               = var.nested_virt,
-    hab_pkg_export            = var.hab_pkg_export
+    hyperv                    = var.hyperv,
+    hab_pkgs                  = var.hab_pkgs,
+    hab_pkg_export            = var.hab_pkg_export,
+    wsl                       = var.wsl,
+    kb_uk                     = var.kb_uk,
+    azure_agent               = var.azure_agent,
+    azure_agent_version       = var.azure_agent_version,
+    azure_agent_org           = var.azure_agent_org,
+    azure_agent_pat           = var.azure_agent_pat,
+    azure_agent_pool          = var.azure_agent_pool
   })
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
-  location = var.resource_group_location
-  tags     = var.tags
-}
-
 module "network-security-group" {
-  source                     = "Azure/network-security-group/azurerm"
-  resource_group_name        = azurerm_resource_group.rg.name
-  location                   = azurerm_resource_group.rg.location 
+  source                     = "/home/steveb/workspace/terraform/modules/srb3/terraform-azurerm-network-security-group"
+  resource_group_name        = var.resource_group_name
+  location                   = var.resource_group_location
   security_group_name        = "nsg-${local.prefix}-${var.instance_name}"
   source_address_prefix      = var.source_address_prefix
   predefined_rules           = var.predefined_rules
@@ -50,10 +57,9 @@ module "network-security-group" {
 }
 
 module "server" {
-  source                        = "srb3/compute/azurerm"
-  version                       = "2.0.9"
-  resource_group_name           = azurerm_resource_group.rg.name
-  location                      = azurerm_resource_group.rg.location 
+  source                        = "/home/steveb/workspace/terraform/modules/srb3/terraform-azurerm-compute"
+  resource_group_name           = var.resource_group_name
+  location                      = var.resource_group_location
   security_group_id             = module.network-security-group.network_security_group_id
   vnet_subnet_id                = var.vnet_subnet_id
   admin_password                = var.user_pass
@@ -77,6 +83,7 @@ module "server" {
   delete_os_disk_on_termination = var.delete_os_disk_on_termination
   data_sa_type                  = var.data_sa_type
   data_disk_size_gb             = var.data_disk_size_gb
+  os_disk_size_gb               = var.os_disk_size_gb
   data_disk                     = var.data_disk
   boot_diagnostics              = var.boot_diagnostics
   boot_diagnostics_sa_type      = var.boot_diagnostics_sa_type
